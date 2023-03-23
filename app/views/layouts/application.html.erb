@@ -2,7 +2,7 @@
 <html>
     <head>
         <%# <link href='https://cdn.lineicons.com/1.0.1/LineIcons.min.css' rel='stylesheet'> %>
-        <title>Plab - Clean & Minimal Ruby on Rails + Bootstrap Admin Dashboard</title>
+        <title>Arif and Sons</title>
         <%= csrf_meta_tags %>
         <%= csp_meta_tag %>
 
@@ -23,10 +23,12 @@
         </div>
         <!-- End Preloader -->
         <!-- Skip Main layout, sidebar, header on authentication -->
-        <% if (controller_name === 'auth') %>
+        <% if (controller_name === 'auth' || current_user == nil ) %>
             <%= yield %>
         <% else %>
             <%= render partial: "layouts/navbar" %>
+            <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>
             <%= render partial: "layouts/sidebar" %>
             <!-- Main Content Wrapper -->
             <div class="main-content d-flex flex-column hide-sidemenu">
