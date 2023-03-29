@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card mb-30">
+      <div class="card-body">
+        <div class="card-header">
+          <a href="<%= new_product_path %>" class="btn btn-primary float-right">New Product</a>
+          <h5 class="card-title">
+            Products
+          </h5>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover text-vertical-middle mb-0">
+            <thead class="bort-none borpt-0">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Stock Type</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @products.each do |product| %>
+                <tr>
+                  <td><strong><%= product.id %></strong></td>
+                  <td><%= product.name %></td>
+                  <td><%= product.quantity %></td>
+                  <td><%= product.stock_type %></td>
+                  <% if product.quantity == 0 %>
+                    <td><span class="badge badge_danger py-1">Out of Stock</span></td>
+                  <% elsif product.min_limit < product.quantity %>
+                    <td><span class="badge badge_success py-1">Available</span></td>
+                  <% elsif product.min_limit >= product.quantity %>
+                    <td><span class="badge badge_warning py-1">Limited</span></td>
+                  <% end%>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

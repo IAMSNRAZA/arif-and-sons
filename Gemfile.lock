@@ -86,6 +86,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    erb-formatter (0.4.2)
+      syntax_tree (~> 5.0)
     erubi (1.12.0)
     ffi (1.15.5)
     globalid (1.1.0)
@@ -123,6 +125,7 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pg (1.4.6)
+    prettier_print (1.2.1)
     public_suffix (5.0.1)
     puma (4.3.12)
       nio4r (~> 2.0)
@@ -186,6 +189,8 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    syntax_tree (5.3.0)
+      prettier_print (>= 1.2.0)
     thor (1.2.1)
     tilt (2.1.0)
     timeout (0.3.2)
@@ -225,6 +230,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   devise
+  erb-formatter
   jbuilder (~> 2.7)
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
