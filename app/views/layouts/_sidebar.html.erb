@@ -62,6 +62,22 @@
                 </a>
 
                 <a 
+                    class="nav-link <%= active_klass(orders_path) %>" 
+                    href="<%= orders_path %>"
+                >
+                    <i data-feather="file-text" class="icon"></i> 
+                    <span class="title">Orders</span>
+                </a>
+
+                <a 
+                    class="nav-link <%= active_klass(customers_path) %>" 
+                    href="<%= customers_path %>"
+                >
+                    <i data-feather="user" class="icon"></i> 
+                    <span class="title">Customers</span>
+                </a>
+
+                <a 
                     class="nav-link <%= active_klass(discussions_chat_path) %>" 
                     href="<%= discussions_chat_path %>"
                 >
