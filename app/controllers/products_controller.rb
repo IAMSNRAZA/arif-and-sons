@@ -47,6 +47,12 @@ class ProductsController < ApplicationController
     end
   end
 
+  def price
+    product = Product.find(params[:id])
+    price = product.item_price.to_f * params[:quantity].to_f # Or whatever method you use to get the price of the product
+    render json: { price: price }
+  end
+
   # DELETE /products/1 or /products/1.json
   def destroy
     @product.destroy

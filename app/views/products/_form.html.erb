@@ -35,6 +35,11 @@
             </div>
 
             <div class="form-group">
+              <%= form.label :item_price %>
+              <%= form.number_field :item_price, class: "form-control" %>
+            </div>
+
+            <div class="form-group">
               <%= form.label :stock_type %>
               <%= form.select :stock_type,
                           options_for_select(form.object.stock_types),

@@ -1,5 +1,9 @@
 class Product < ApplicationRecord
+
+  has_many :order_items
+  has_many :orders, through: :order_items
+
   def stock_types
-    ['Type1', 'Type2']
+    ['Retail', 'Wholesale']
   end
 end

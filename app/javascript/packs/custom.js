@@ -124,6 +124,49 @@ $(document).on('turbolinks:load', function () {
         // Removes Active Class From Other Titles
         $('.accordion-title').not($(this)).removeClass('active');
     });
+
+    function updateRemainingAmount() {
+        var total = parseFloat($('#order_total').val() || 0);
+        var paid = parseFloat($('#order_payed_amount').val() || 0);
+        var remaining = total - paid;
+        $('#order_remaining_amount').val(remaining);
+    }
+    $('#order_total, #order_payed_amount').on('change', function() {
+    updateRemainingAmount();
+    });
+
+    $(document).on('cocoon:after-insert cocoon:after-remove', function() {
+      var total = 0;
+      $('input[id="order_item_price"]').each(function() {
+        var price = parseFloat($(this).val()) || 0;
+        total += price;
+      });
+      $('#total_price').text(total.toFixed(2)); // output the total price to an element with ID "total_price"
+    });
+
+    $(document).on('change', 'select[name$="[product_id]"], input[name$="[quantity]"]', function() {
+      var $nestedFields = $(this).closest('.nested-fields');
+      var productId = $nestedFields.find('select[name$="[product_id]"]').val();
+      var quantity = $nestedFields.find('input[name$="[quantity]"]').val();
+    
+      // Fetch the price via AJAX
+      var price = 0;
+      if (productId && quantity) {
+        $.ajax({
+          url: '/products/' + productId + '/price',
+          type: 'GET',
+          dataType: 'json',
+          data: { quantity: quantity },
+          async: false,
+          success: function(data) {
+            price = data.price;
+          }
+        });
+      }
+      $nestedFields.find('input[name$="[price]"]').val(price.toFixed(2));
+      var total = parseFloat($('#order_total').val() || 0);
+      $('#order_total').val(total += price);
+    });
 });
 // Preloader JS
 $(window).on('turbolinks:load', function () {
