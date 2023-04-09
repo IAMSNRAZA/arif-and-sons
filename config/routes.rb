@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :payment_transactions
   resources :customers
   resources :orders
   resources :products
@@ -6,7 +7,7 @@ Rails.application.routes.draw do
     devise_for :users
     # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-    root 'dashboards#sales'
+    root 'orders#new'
 
     # Dashboard Routes
     get '/dashboard/sales', to: 'dashboards#sales', as: :dashboard_sales

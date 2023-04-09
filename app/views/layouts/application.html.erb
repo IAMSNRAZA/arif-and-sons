@@ -29,13 +29,18 @@
             <%= yield %>
         <% else %>
             <%= render partial: "layouts/navbar" %>
-            <p class="notice"><%= notice %></p>
-            <p class="alert"><%= alert %></p>
             <%= render partial: "layouts/sidebar" %>
             <!-- Main Content Wrapper -->
             <div class="main-content d-flex flex-column hide-sidemenu">
+                <% if alert || notice %>
+                  <div class="alert <%= alert.nil? ? 'alert-info' : 'alert-danger' %> alert-dismissible fade show" role="alert">
+                      <%= alert || notice %>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                <% end %>
                 <%= yield %>
-            
                 <%= render partial: "layouts/footer" %>
             </div>
         <% end %>

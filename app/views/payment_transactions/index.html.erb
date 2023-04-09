@@ -1,0 +1,104 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card mb-30">
+      <div class="card-body">
+        <div class="card-header">
+          <h5 class="card-title">
+            Make a Transaction
+          </h5>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover text-vertical-middle mb-0">
+            <thead class="bort-none borpt-0">
+              <tr>
+                <% credit_transaction = PaymentTransaction.new %>
+                <%= form_with(model: credit_transaction) do |form| %>
+                  <th scope="col"><%= form.number_field :credit, placeholder: 'Enter Amount' %></th>
+                  <th scope="col"> <%= form.text_field :notes, placeholder: 'Enter Notes' %></th>
+                  <th scope="col"> <%= form.submit 'Cash In', class: "btn btn-primary" %></th>
+                <% end %>
+              </tr>
+              <tr>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+              </tr>
+              <tr>
+                <% debit_transaction = PaymentTransaction.new %>
+                <%= form_with(model: debit_transaction) do |form| %>
+                  <th scope="col"><%= form.number_field :debit, placeholder: 'Enter Amount' %></th>
+                  <th scope="col"> <%= form.text_field :notes, placeholder: 'Enter Notes' %></th>
+                  <th scope="col"> <%= form.submit 'Cash Out', class: "btn btn-primary" %></th>
+                <% end %>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card mb-30">
+      <div class="card-body">
+        <div class="card-header">
+          <a class="btn btn-primary float-right">Total Debit Today: <%= @todays_debit%></a>
+          <a class="btn btn-primary float-right" style="margin-left: 10px;">Total Credit Today: <%= @todays_credit%></a>
+          <h5 class="card-title">
+            Payment Transactions
+          </h5>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover text-vertical-middle mb-0">
+            <thead class="bort-none borpt-0">
+              <tr>
+                <th scope="col">Credit</th>
+                <th scope="col">Debit</th>
+                <th scope="col">Notes</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @payment_transactions.each do |payment_transaction| %>
+                <tr>
+                  <td><%= payment_transaction.credit %></td>
+                  <td><%= payment_transaction.debit %></td>
+                  <td><%= payment_transaction.notes %></td>
+                  <td><%= link_to "Show", payment_transaction %></td>
+                  <td><%= link_to "Edit", edit_payment_transaction_path(payment_transaction) %></td>
+                  <td><%= link_to "Destroy",
+                    payment_transaction,
+                    method: :delete,
+                    data: {
+                      confirm: "Are you sure?"
+                    } %></td>
+                </tr>
+              <% end %>
+                  <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                  </tr>
+                  <tr>
+                    <td>Total: <%=  @payment_transactions.total_credit %></td>
+                    <td>Total: <%= @payment_transactions.total_debit %></td>
+                  </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

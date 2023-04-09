@@ -288,10 +288,7 @@
                         <i data-feather="settings" class="icon"></i>
                         Settings
                     </a>
-                    <a class="dropdown-item" href="login.html">
-                        <i data-feather="log-out" class="icon"></i>
-                        Logout
-                    </a>
+                    <%= button_to 'Logout', destroy_user_session_path, method: :delete, class:'dropdown-item' %>
                 </div>
             </li>
         </ul>
