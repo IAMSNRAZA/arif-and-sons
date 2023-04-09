@@ -1,13 +1,13 @@
 <div class="nested-fields">
   <div class="form-row">
-    <div class="col-md-8 mb-3 form-group">
+    <div class="col-md-8 form-group">
       <%= f.collection_select :product_id, Product.all, :id, :name, { include_blank: true }, { class: "form-control" } do |product| %>
         <% price = number_to_currency(product.item_price, unit: '') %>
         <option value="<%= product.id %>" data-price="<%= product.item_price %>"><%= product.name %> ( <%= price %> )</option>
       <% end %>
     </div>
-    <div class="col-md-4 mb-3 form-group">
-      <%= f.label :quantity, "Quantity" %>
+    <div class="col-md-4 form-group">
+      <%= f.label :quantity, "Quantity", class: "d-none" %>
       <%= f.number_field :quantity, class: "form-control" %>
     </div>
     <%= f.hidden_field :price, id: 'order_item_price' %>

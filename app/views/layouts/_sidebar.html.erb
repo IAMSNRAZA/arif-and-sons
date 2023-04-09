@@ -78,6 +78,14 @@
                 </a>
 
                 <a 
+                    class="nav-link <%= active_klass(payment_transactions_path) %>" 
+                    href="<%= payment_transactions_path %>"
+                >
+                    <i data-feather="bar-chart-2" class="icon"></i> 
+                    <span class="title">Cash Flow</span>
+                </a>
+
+                <a 
                     class="nav-link <%= active_klass(discussions_chat_path) %>" 
                     href="<%= discussions_chat_path %>"
                 >

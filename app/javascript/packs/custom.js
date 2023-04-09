@@ -125,14 +125,14 @@ $(document).on('turbolinks:load', function () {
         $('.accordion-title').not($(this)).removeClass('active');
     });
 
-    function updateRemainingAmount() {
+    function updateRemainingAmount2() {
         var total = parseFloat($('#order_total').val() || 0);
         var paid = parseFloat($('#order_payed_amount').val() || 0);
         var remaining = total - paid;
         $('#order_remaining_amount').val(remaining);
     }
-    $('#order_total, #order_payed_amount').on('change', function() {
-    updateRemainingAmount();
+    $('#order_total, #order_payed_amount').on('input', function() {
+      updateRemainingAmount2();
     });
 
     $(document).on('cocoon:after-insert cocoon:after-remove', function() {
@@ -142,13 +142,17 @@ $(document).on('turbolinks:load', function () {
         total += price;
       });
       $('#total_price').text(total.toFixed(2)); // output the total price to an element with ID "total_price"
+
+      updateRemainingAmount(total);
+      updateOrderTotal(total);
     });
 
-    $(document).on('change', 'select[name$="[product_id]"], input[name$="[quantity]"]', function() {
+    // $(document).on('change', 'select[name$="[product_id]"], input[name$="[quantity]"]', function() {
+    $(document).on('keyup', 'input[name$="[quantity]"]', function() {
       var $nestedFields = $(this).closest('.nested-fields');
       var productId = $nestedFields.find('select[name$="[product_id]"]').val();
       var quantity = $nestedFields.find('input[name$="[quantity]"]').val();
-    
+
       // Fetch the price via AJAX
       var price = 0;
       if (productId && quantity) {
@@ -164,9 +168,31 @@ $(document).on('turbolinks:load', function () {
         });
       }
       $nestedFields.find('input[name$="[price]"]').val(price.toFixed(2));
-      var total = parseFloat($('#order_total').val() || 0);
-      $('#order_total').val(total += price);
+      updateOrderTotal();
     });
+
+    function updateRemainingAmount(total) {
+      var paid = parseFloat($('#order_payed_amount').val() || 0);
+      var remaining = total - paid;
+      $('#order_remaining_amount').val(remaining.toFixed(2));
+    }
+
+    function updateOrderTotal() {
+      var total = 0;
+      $('input[id="order_item_price"]').each(function() {
+        var price = parseFloat($(this).val()) || 0;
+        total += price;
+      });
+      $('#order_total').val(total.toFixed(2));
+      updateRemainingAmount(total);
+    }
+
+    document.querySelector('#new_order').addEventListener('submit', function() {
+      debugger;
+      document.getElementById("order_remaining_amount").disabled = false;
+      document.getElementById("new_order").submit();
+    });
+
 });
 // Preloader JS
 $(window).on('turbolinks:load', function () {

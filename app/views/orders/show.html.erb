@@ -7,7 +7,9 @@
 
 <p>
   <strong>Products:</strong>
-  <%= @order.products %>
+  <% @order.order_items.each do |order_item| %>
+    <%= order_item.product.name %> => <%= order_item.quantity%>
+  <% end %>
 </p>
 
 <p>
