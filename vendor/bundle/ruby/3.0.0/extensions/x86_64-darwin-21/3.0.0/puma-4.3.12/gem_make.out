@@ -1,0 +1,26 @@
+current directory: /Users/macbook/Downloads/arif-and-sons/vendor/bundle/ruby/3.0.0/gems/puma-4.3.12/ext/puma_http11
+/Users/macbook/.rvm/rubies/ruby-3.0.0/bin/ruby -I /Users/macbook/.rvm/rubies/ruby-3.0.0/lib/ruby/3.0.0 -r ./siteconf20230411-75906-vpbzce.rb extconf.rb
+checking for BIO_read() in -lcrypto... yes
+checking for SSL_CTX_new() in -lssl... yes
+checking for openssl/bio.h... yes
+checking for DTLS_method() in openssl/ssl.h... yes
+checking for TLS_server_method() in openssl/ssl.h... yes
+checking for SSL_CTX_set_min_proto_version in openssl/ssl.h... yes
+checking for Random.bytes... yes
+creating Makefile
+
+current directory: /Users/macbook/Downloads/arif-and-sons/vendor/bundle/ruby/3.0.0/gems/puma-4.3.12/ext/puma_http11
+make "DESTDIR=" clean
+
+current directory: /Users/macbook/Downloads/arif-and-sons/vendor/bundle/ruby/3.0.0/gems/puma-4.3.12/ext/puma_http11
+make "DESTDIR="
+compiling http11_parser.c
+compiling io_buffer.c
+compiling mini_ssl.c
+compiling puma_http11.c
+linking shared-object puma/puma_http11.bundle
+ld: warning: -undefined dynamic_lookup may not work with chained fixups
+
+current directory: /Users/macbook/Downloads/arif-and-sons/vendor/bundle/ruby/3.0.0/gems/puma-4.3.12/ext/puma_http11
+make "DESTDIR=" install
+/usr/local/opt/coreutils/bin/ginstall -c -m 0755 puma_http11.bundle ./.gem.20230411-75906-htnhfv/puma
