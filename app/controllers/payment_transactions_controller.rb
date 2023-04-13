@@ -3,9 +3,9 @@ class PaymentTransactionsController < ApplicationController
 
   # GET /payment_transactions or /payment_transactions.json
   def index
-    @payment_transactions = PaymentTransaction.all
-    @todays_debit = PaymentTransaction.where(transaction_type: 'debit').where("created_at >= ?", Time.zone.now.beginning_of_day).total_debit
-    @todays_credit = PaymentTransaction.where(transaction_type: 'credit').where("created_at >= ?", Time.zone.now.beginning_of_day).total_credit
+    @payment_transactions = current_user.payment_transactions.order(id: :desc)
+    @todays_debit = @payment_transactions.where(transaction_type: 'debit').where("created_at >= ?", Time.zone.now.beginning_of_day).total_debit
+    @todays_credit = @payment_transactions.where(transaction_type: 'credit').where("created_at >= ?", Time.zone.now.beginning_of_day).total_credit
   end
 
   # GET /payment_transactions/1 or /payment_transactions/1.json
@@ -24,6 +24,7 @@ class PaymentTransactionsController < ApplicationController
   # POST /payment_transactions or /payment_transactions.json
   def create
     @payment_transaction = PaymentTransaction.new(payment_transaction_params)
+    @payment_transaction.user = current_user
     if @payment_transaction.save
       redirect_to payment_transactions_path
       flash[:notice] = "Payment was successfully created."

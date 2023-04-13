@@ -1,7 +1,7 @@
 <div class="nested-fields">
   <div class="form-row">
     <div class="col-md-8 form-group">
-      <%= f.collection_select :product_id, Product.all, :id, :name, { include_blank: true }, { class: "form-control" } do |product| %>
+      <%= f.collection_select :product_id, current_user.products, :id, :name, { include_blank: true }, { class: "form-control" } do |product| %>
         <% price = number_to_currency(product.item_price, unit: '') %>
         <option value="<%= product.id %>" data-price="<%= product.item_price %>"><%= product.name %> ( <%= price %> )</option>
       <% end %>

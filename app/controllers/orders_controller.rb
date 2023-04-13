@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.all
+    @orders = current_user.orders.order(id: :desc)
   end
 
   # GET /orders/1 or /orders/1.json
@@ -22,9 +22,10 @@ class OrdersController < ApplicationController
   # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)
-
+    @order.user = current_user
+    @order.order_items.map { |item| item.user_id= current_user.id }
     if @order.deduct_stock && @order.save
-      redirect_to orders_path
+      redirect_to new_order_path
       flash[:notice] = "Order was successfully created."
     else
       flash[:alert] = @order.errors.full_messages.join("<br>").html_safe

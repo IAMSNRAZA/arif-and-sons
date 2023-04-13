@@ -18,6 +18,7 @@
               <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Customer</th>
+                <th scope="col">Order Items</th>
                 <th scope="col">Total</th>
                 <th scope="col">Payed amount</th>
                 <th scope="col">Remaining amount</th>
@@ -32,6 +33,7 @@
                   <td>
                     <% order.order_items.each do |order_item| %>
                       <%= order_item.product.name %> => <%= order_item.quantity%>
+                      </br>
                     <% end %>
                   </td>
                   <td><%= order.total %></td>

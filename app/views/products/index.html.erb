@@ -20,6 +20,7 @@
                 <th scope="col">Quantity</th>
                 <th scope="col">Stock Type</th>
                 <th scope="col">Status</th>
+                <th colspan="3">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -31,11 +32,15 @@
                   <td><%= product.stock_type %></td>
                   <% if product.quantity == 0 %>
                     <td><span class="badge badge_danger py-1">Out of Stock</span></td>
-                  <% elsif product.min_limit < product.quantity %>
+                  <% elsif product.min_limit.to_f < product.quantity.to_f %>
                     <td><span class="badge badge_success py-1">Available</span></td>
-                  <% elsif product.min_limit >= product.quantity %>
+                  <% elsif product.min_limit.to_f >= product.quantity.to_f %>
                     <td><span class="badge badge_warning py-1">Limited</span></td>
                   <% end%>
+                  <td><%= link_to 'Show', product, class: 'btn btn-success text-white' %></td>
+                  <td><%= link_to 'Edit', edit_product_path(product), class: 'btn btn-primary text-white' %>
+                  <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger text-white' %></td>
+                
                 </tr>
               <% end %>
             </tbody>
