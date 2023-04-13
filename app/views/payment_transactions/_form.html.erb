@@ -1,32 +1,45 @@
-<%= form_with(model: payment_transaction) do |form| %>
-  <% if payment_transaction.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(payment_transaction.errors.count, "error") %> prohibited this payment_transaction from being saved:</h2>
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card mb-30">
+      <div class="card-body">
+        <div class="card-header">
+          <h5 class="card-title">Transaction</h5>
+        </div>
+        <%= form_with(model: payment_transaction) do |form| %>
+          <% if payment_transaction.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(payment_transaction.errors.count, "error") %>
+                prohibited this payment_transaction from being saved:</h2>
 
-      <ul>
-        <% payment_transaction.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+              <ul>
+                <% payment_transaction.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <form>
+            <div class="form-group">
+              <%= form.label :credit %>
+              <%= form.text_field :credit, class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label :debit %>
+              <%= form.text_field :debit, class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label :notes %>
+              <%= form.text_area :notes, class: "form-control" %>
+            </div>
+
+            <%= form.submit "Submit", class: "btn btn-primary" %>
+          </form>
         <% end %>
-      </ul>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :credit %>
-    <%= form.text_field :credit %>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label :debit %>
-    <%= form.text_field :debit %>
-  </div>
 
-  <div class="field">
-    <%= form.label :notes %>
-    <%= form.text_area :notes %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
