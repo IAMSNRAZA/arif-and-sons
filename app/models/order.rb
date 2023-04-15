@@ -36,12 +36,12 @@ class Order < ApplicationRecord
   end
 
   def create_transaction
-    transaction = PaymentTransaction.new(credit: self.payed_amount, notes: "#{self.id} Order Transaction")
+    transaction = PaymentTransaction.new(credit: self.payed_amount, notes: "#{self.id} Order Transaction", user_id: self.user_id)
     transaction.save
   end
 
   def remove_transaction
-    transaction = PaymentTransaction.new(debit: self.payed_amount, notes: "#{self.id} Order Transaction")
+    transaction = PaymentTransaction.new(debit: self.payed_amount, notes: "#{self.id} Order Transaction", user_id: self.user_id)
     transaction.save
   end
 
