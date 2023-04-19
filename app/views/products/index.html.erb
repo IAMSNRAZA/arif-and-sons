@@ -4,8 +4,27 @@
   <div class="col-lg-12">
     <div class="card mb-30">
       <div class="card-body">
+        <h5 class="card-title">
+          Search
+        </h5>
+        <%= search_form_for @search, url: products_path, method: :get, html: { id: 'product-search-form' } do |f| %>
+          <%= f.label :stock_type_eq, "Stock Type" %>
+          <%= f.select :stock_type_eq, options_for_select(['Retail', 'Wholesale'], selected: params[:q].present? ? params[:q][:stock_type_eq] : ''), { }, { class: 'form-control', id: 'stock-type-select', style: 'display: inline-block' } %>
+          <%= f.label :name_cont, "Name" %>
+          <%= f.text_field :name_cont, class: 'form-control', id: 'product-name-search', style: 'display: inline-block' %>
+          <%= f.submit 'Submit', class: 'btn btn-primary text-white float-right mt-4' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card mb-30">
+      <div class="card-body">
         <div class="card-header">
-          <a href="<%= new_product_path %>" class="btn btn-primary float-right">New Product</a>
+          <a href="<%= new_product_path %>" class="btn btn-primary float-right" style="display: inline-block">New Product</a>
           <h5 class="card-title">
             Products
           </h5>

@@ -187,11 +187,19 @@ $(document).on('turbolinks:load', function () {
       updateRemainingAmount(total);
     }
 
+    $('#stock-type-select').on('input', function() {
+      $('#product-search-form').submit();
+    });
+
+    $('input[type="radio"][name="transaction_type"]').on('change', function() {
+      $('#transactions_search_form').submit();
+    });
+
     document.querySelector('#new_order').addEventListener('submit', function() {
-      debugger;
       document.getElementById("order_remaining_amount").disabled = false;
       document.getElementById("new_order").submit();
     });
+
 
 });
 // Preloader JS

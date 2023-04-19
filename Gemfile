@@ -21,6 +21,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 gem 'erb-formatter'
 gem "cocoon"
+gem 'ransack'
+gem 'byebug'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

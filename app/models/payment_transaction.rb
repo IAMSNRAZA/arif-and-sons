@@ -2,6 +2,7 @@ class PaymentTransaction < ApplicationRecord
 
   belongs_to :user
   before_create :set_transaction_type
+  belongs_to :order, optional: true
 
   def set_transaction_type
     if !credit || credit == 0

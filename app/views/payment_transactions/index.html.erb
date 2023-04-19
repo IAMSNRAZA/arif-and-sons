@@ -49,13 +49,30 @@
   <div class="col-lg-12">
     <div class="card mb-30">
       <div class="card-body">
-        <div class="card-header">
-          <a class="btn btn-primary float-right">Total Debit Today: <%= @todays_debit%></a>
-          <a class="btn btn-primary float-right" style="margin-left: 10px;">Total Credit Today: <%= @todays_credit%></a>
-          <h5 class="card-title">
-            Payment Transactions
-          </h5>
-        </div>
+        <%= form_tag(payment_transactions_path, method: :get, id: 'transactions_search_form') do %>
+          <div class="card-header">
+            <a class="btn btn-primary float-right">Total Debit Today: <%= @todays_debit%></a>
+            <a class="btn btn-primary float-right" style="margin-left: 10px;">Total Credit Today: <%= @todays_credit%></a>
+            <h5 class="card-title">
+              Payment Transactions
+            </h5>
+
+            <div class="form-check form-check-inline float-right">
+              <%= radio_button_tag 'transaction_type', 'orders', id: 'orders_radio' %>
+              <%= label_tag 'transaction_type_orders', 'Orders', class: 'form-check-label', for: 'orders_radio'%>
+            </div>
+
+            <div class="form-check form-check-inline float-right">
+              <%= radio_button_tag 'transaction_type', 'non_orders', id: 'non_orders_radio' %>
+              <%= label_tag 'transaction_type_non_orders', 'Non-Orders', class: 'form-check-label', for: 'non_orders_radio' %>
+            </div>
+
+            <div class="form-check form-check-inline float-right">
+              <%= radio_button_tag 'transaction_type', 'all', id: 'all_orders_radio' %>
+              <%= label_tag 'transaction_type_orders', 'All', class: 'form-check-label', for: 'orders_radio'%>
+            </div>
+          </div>
+        <% end %>
 
         <div class="table-responsive">
           <table class="table table-hover text-vertical-middle mb-0">
