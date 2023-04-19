@@ -19,14 +19,20 @@
 
 /public/assets
 .byebug_history
+yarn.lock
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
 /public/packs
 /public/packs-test
-/yarn.lock
-/node_modules
+
+node_modules
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+vendor/cache/*
+vendor/bundle
+vendor/.m2
+vendor/.yarn-cache

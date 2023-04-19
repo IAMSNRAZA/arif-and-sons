@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   belongs_to :customer
   belongs_to :user
   has_many :order_items, dependent: :destroy
+  has_many :payment_transactions
   has_many :products, through: :order_items
   accepts_nested_attributes_for :order_items, allow_destroy: true
 
@@ -36,12 +37,12 @@ class Order < ApplicationRecord
   end
 
   def create_transaction
-    transaction = PaymentTransaction.new(credit: self.payed_amount, notes: "#{self.id} Order Transaction", user_id: self.user_id)
+    transaction = PaymentTransaction.new(order_id: self.id, credit: self.payed_amount, notes: "#{self.id} Order Transaction", user_id: self.user_id)
     transaction.save
   end
 
   def remove_transaction
-    transaction = PaymentTransaction.new(debit: self.payed_amount, notes: "#{self.id} Order Transaction", user_id: self.user_id)
+    transaction = PaymentTransaction.new(order_id: self.id, debit: self.payed_amount, notes: "#{self.id} Order Transaction", user_id: self.user_id)
     transaction.save
   end
 

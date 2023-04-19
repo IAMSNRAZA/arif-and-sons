@@ -3,7 +3,11 @@ class PaymentTransactionsController < ApplicationController
 
   # GET /payment_transactions or /payment_transactions.json
   def index
-    @payment_transactions = current_user.payment_transactions.order(id: :desc)
+    if params["transaction_type"] == 'orders'
+      @payment_transactions = current_user.payment_transactions.where.not(order_id: nil).order(id: :desc)
+    else
+      @payment_transactions = current_user.payment_transactions.order(id: :desc)
+    end
     @todays_debit = @payment_transactions.where(transaction_type: 'debit').where("created_at >= ?", Time.zone.now.beginning_of_day).total_debit
     @todays_credit = @payment_transactions.where(transaction_type: 'credit').where("created_at >= ?", Time.zone.now.beginning_of_day).total_credit
   end
